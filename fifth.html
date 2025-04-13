@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СПК Колхоз-племзавод «Казьминский»</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>СПК Колхоз-племзавод «Казьминский»</h1>
+        </div>
+        <div class="nav">
+            <a href="index.html">Посевы</a>
+            <a href="second.html">Корма</a>
+            <a href="third.html">Поголовье</a>
+            <a href="fourth.html">Продукция</a>
+            <a href="fifth.html">Реал. зерна</a>
+        </div>
+        <div class="content">
+            <div class="main">
+                <div class="table-container">
+                    <button class="add-row-btn" id="openModalBtn">Добавить строку</button>
+                    <button class="add-row-btn" id="createReportBtn" style="margin-left: -2780px;">Создать отчёт</button>
+                    <div class="search-container">
+                        <label for="search">Поиск:</label>
+                        <input type="text" id="search" onkeyup="searchTable()" placeholder="Поиск по культуре...">
+                    </div>
+                </div>
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Культура</th>
+                            <th>Цена зерна</th>
+                            <th>Количество продажи</th>
+                            <th>Дата продажи</th>
+                            <th>Канал реализации</th>
+                            <th>Операции</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>Пшеница озимая</td>
+                            <td>1393</td>
+                            <td>661658</td>
+                            <td>7/30/2021 12:00</td>
+                            <td>На рынок</td>
+
+                            <td class="operations">
+                                <button class="edit" onclick="editRow(this)">✏️</button>
+                                <button class="delete" onclick="deleteRow(this)">🗑️</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>Пшеница озимая</td>
+                            <td>1200</td>
+                            <td>9150</td>
+                            <td>7/28/2021 12:00</td>
+                            <td>Работникам</td>
+
+                            <td class="operations">
+                                <button class="edit" onclick="editRow(this)">✏️</button>
+                                <button class="delete" onclick="deleteRow(this)">🗑️</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>Кукуруза</td>
+                            <td>1614</td>
+                            <td>223006</td>
+                            <td>7/25/2021 12:00</td>
+                            <td>На рынок</td>
+
+                            <td class="operations">
+                                <button class="edit" onclick="editRow(this)">✏️</button>
+                                <button class="delete" onclick="deleteRow(this)">🗑️</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>Кукуруза</td>
+                            <td>1400</td>
+                            <td>3535</td>
+                            <td>7/29/2021 12:00</td>
+                            <td>Работникам</td>
+
+                            <td class="operations">
+                                <button class="edit" onclick="editRow(this)">✏️</button>
+                                <button class="delete" onclick="deleteRow(this)">🗑️</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>Кукуруза гибридная</td>
+                            <td>6671</td>
+                            <td>6438</td>
+                            <td>7/31/2021 12:00</td>
+                            <td>На рынок</td>
+
+                            <td class="operations">
+                                <button class="edit" onclick="editRow(this)">✏️</button>
+                                <button class="delete" onclick="deleteRow(this)">🗑️</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <button>&laquo;</button>
+                    <button class="active">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>&raquo;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Добавить новую строку</h2>
+            <div class="form-group">
+                <label for="culture">Культура</label>
+                <input type="text" id="culture" name="culture">
+            </div>
+            <div class="form-group">
+                <label for="yield">Урожайность</label>
+                <input type="number" id="yield" name="yield">
+            </div>
+            <div class="form-group">
+                <label for="landType">Вид угодья</label>
+                <input type="text" id="landType" name="landType">
+            </div>
+            <div class="form-group">
+                <label for="sowingDate">Дата посева</label>
+                <input type="datetime-local" id="sowingDate" name="sowingDate">
+            </div>
+            <div class="form-group">
+                <label for="sowing">Посев</label>
+                <input type="number" id="sowing" name="sowing">
+            </div>
+            <div class="form-group">
+                <label for="harvestDate">Дата уборки</label>
+                <input type="datetime-local" id="harvestDate" name="harvestDate">
+            </div>
+            <div class="form-group">
+                <label for="harvestAmount">Сбор кол-во</label>
+                <input type="number" id="harvestAmount" name="harvestAmount">
+            </div>
+            <button id="addRowBtn" onclick="addRow()">Добавить строку</button>
+            <button id="saveRowBtn" style="display:none;" onclick="saveRow()">Сохранить изменения</button>
+        </div>
+    </div>
+
+    <script>
+        let modal = document.getElementById("myModal");
+        let openModalBtn = document.getElementById("openModalBtn");
+        let closeModalSpan = document.getElementsByClassName("close")[0];
+        let addRowBtn = document.getElementById("addRowBtn");
+        let saveRowBtn = document.getElementById("saveRowBtn");
+        let currentEditRow = null;
+
+        openModalBtn.onclick = function() {
+            modal.style.display = "flex";
+        }
+
+        closeModalSpan.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function addRow() {
+            let table = document.getElementById("data-table").getElementsByTagName('tbody')[0];
+            let newRow = table.insertRow();
+
+            let cell1 = newRow.insertCell(0);
+            let cell2 = newRow.insertCell(1);
+            let cell3 = newRow.insertCell(2);
+            let cell4 = newRow.insertCell(3);
+            let cell5 = newRow.insertCell(4);
+            let cell6 = newRow.insertCell(5);
+            let cell7 = newRow.insertCell(6);
+            let cell8 = newRow.insertCell(7);
+            let cell9 = newRow.insertCell(8);
+
+            cell1.innerHTML = '<input type="checkbox">';
+            cell2.innerHTML = document.getElementById("culture").value;
+            cell3.innerHTML = document.getElementById("yield").value;
+            cell4.innerHTML = document.getElementById("landType").value;
+            cell5.innerHTML = document.getElementById("sowingDate").value;
+            cell6.innerHTML = document.getElementById("sowing").value;
+            cell7.innerHTML = document.getElementById("harvestDate").value;
+            cell8.innerHTML = document.getElementById("harvestAmount").value;
+            cell9.innerHTML = '<button class="edit" onclick="editRow(this)">✏️</button><button class="delete" onclick="deleteRow(this)">🗑️</button>';
+
+            modal.style.display = "none";
+            clearForm();
+        }
+
+        function editRow(button) {
+            let row = button.parentNode.parentNode;
+            currentEditRow = row;
+
+            document.getElementById("culture").value = row.cells[1].innerHTML;
+            document.getElementById("yield").value = row.cells[2].innerHTML;
+            document.getElementById("landType").value = row.cells[3].innerHTML;
+            document.getElementById("sowingDate").value = row.cells[4].innerHTML;
+            document.getElementById("sowing").value = row.cells[5].innerHTML;
+            document.getElementById("harvestDate").value = row.cells[6].innerHTML;
+            document.getElementById("harvestAmount").value = row.cells[7].innerHTML;
+
+            addRowBtn.style.display = "none";
+            saveRowBtn.style.display = "inline";
+            modal.style.display = "flex";
+        }
+
+        function saveRow() {
+            if (currentEditRow != null) {
+                currentEditRow.cells[1].innerHTML = document.getElementById("culture").value;
+                currentEditRow.cells[2].innerHTML = document.getElementById("yield").value;
+                currentEditRow.cells[3].innerHTML = document.getElementById("landType").value;
+                currentEditRow.cells[4].innerHTML = document.getElementById("sowingDate").value;
+                currentEditRow.cells[5].innerHTML = document.getElementById("sowing").value;
+                currentEditRow.cells[6].innerHTML = document.getElementById("harvestDate").value;
+                currentEditRow.cells[7].innerHTML = document.getElementById("harvestAmount").value;
+
+                modal.style.display = "none";
+                addRowBtn.style.display = "inline";
+                saveRowBtn.style.display = "none";
+                currentEditRow = null;
+                clearForm();
+            }
+        }
+
+        function deleteRow(button) {
+            let row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
+        function clearForm() {
+            document.getElementById("culture").value = '';
+            document.getElementById("yield").value = '';
+            document.getElementById("landType").value = '';
+            document.getElementById("sowingDate").value = '';
+            document.getElementById("sowing").value = '';
+            document.getElementById("harvestDate").value = '';
+            document.getElementById("harvestAmount").value = '';
+        }
+
+        function searchTable() {
+            let input = document.getElementById("search");
+            let filter = input.value.toUpperCase();
+            let table = document.getElementById("data-table");
+            let tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+                let td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    let txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
